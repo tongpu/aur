@@ -1,0 +1,23 @@
+pkgname=glb-git
+pkgver=1.0.1
+pkgrel=1
+pkgdesc="Galera Load Balancer - a simple TCP connection proxy and load-balancing library"
+arch=('i686' 'x86_64')
+url="https://github.com/codership/glb"
+license=('GPL')
+groups=('base-devel')
+depends=('glibc')
+source=(glb-git::git+https://github.com/codership/glb.git)
+md5sums=('SKIP')
+
+build() {
+        cd "$srcdir/$pkgname"
+        ./bootstrap.sh
+        ./configure --prefix=/usr --sbindir=/usr/bin
+        make
+}
+
+package() {
+        cd "$srcdir/$pkgname"
+        make DESTDIR="$pkgdir/" install
+}
