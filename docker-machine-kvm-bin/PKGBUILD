@@ -1,0 +1,16 @@
+# Maintainer: Lukas Grossar <lukas.grossar@gmail.com>
+
+pkgname=docker-machine-kvm-bin
+pkgdesc="Docker Machine KVM driver"
+pkgver=0.7.0
+pkgrel=1
+arch=('x86_64')
+url="https://github.com/dhiltgen/docker-machine-kvm"
+license=('apache')
+_docker_machine_driver_kvm_file=docker-machine-driver-kvm-$pkgver
+source_x86_64=($_docker_machine_driver_kvm_file::https://github.com/dhiltgen/docker-machine-kvm/releases/download/v$pkgver/docker-machine-driver-kvm)
+md5sums_x86_64=('519d29300df740a73c90d048e5df43fb')
+
+package() {
+  install -Dm 755 "$srcdir/$_docker_machine_driver_kvm_file" "$pkgdir/usr/bin/docker-machine-driver-kvm"
+}
